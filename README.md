@@ -22,7 +22,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 ## Usage
 
-### Option 1 — Claude Code skill (no API key needed in Python)
+### Option 1 — Claude Code skill
 
 If you have [Claude Code](https://claude.ai/code), clone the repo and use the `/winloss` slash command directly in your session:
 
@@ -30,11 +30,9 @@ If you have [Claude Code](https://claude.ai/code), clone the repo and use the `/
 /winloss /path/to/your/deals.csv
 ```
 
-Claude Code auto-detects the schema, then you ask questions in plain English. No setup beyond cloning.
+Claude Code auto-detects the schema, then you ask questions in plain English. No pip install needed.
 
 ### Option 2 — Standalone terminal agent
-
-Requires Python 3.10+ and an [Anthropic API key](https://console.anthropic.com/).
 
 ```bash
 pip3 install anthropic
