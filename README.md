@@ -22,13 +22,30 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 ## Usage
 
-```bash
-# with your own CSV
-python3 winloss_agent.py /path/to/your/deals.csv
+### Option 1 — Claude Code skill (no API key needed in Python)
 
-# or run and enter the path when prompted
-python3 winloss_agent.py
+If you have [Claude Code](https://claude.ai/code), clone the repo and use the `/winloss` slash command directly in your session:
+
 ```
+/winloss /path/to/your/deals.csv
+```
+
+Claude Code auto-detects the schema, then you ask questions in plain English. No setup beyond cloning.
+
+### Option 2 — Standalone terminal agent
+
+Requires Python 3.10+ and an [Anthropic API key](https://console.anthropic.com/).
+
+```bash
+pip3 install anthropic
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+python3 winloss_agent.py /path/to/your/deals.csv
+```
+
+Works anywhere — no Claude Code required.
+
+---
 
 Your CSV needs at minimum:
 - An **outcome column** — values like Won/Lost, Win/Loss, 1/0
@@ -42,6 +59,10 @@ Sales cycle days is optional but improves scoring if present.
 A 50-row synthetic B2B dataset is included (`win_loss_data.csv`) so you can try it immediately:
 
 ```bash
+# Claude Code skill
+/winloss win_loss_data.csv
+
+# or standalone agent
 python3 winloss_agent.py win_loss_data.csv
 ```
 
@@ -59,7 +80,9 @@ Higher score = better fit for your ICP. Segments with fewer than 2 deals are exc
 
 | File | Description |
 |------|-------------|
-| `winloss_agent.py` | General-purpose agent — works with any CSV |
+| `.claude/commands/winloss.md` | Claude Code skill — invoke with `/winloss <csv>` |
+| `winloss_tool.py` | Data CLI used by the skill (no API calls) |
+| `winloss_agent.py` | Standalone terminal agent — works with any CSV |
 | `icp_agent.py` | Agent hardcoded to the sample dataset schema |
 | `icp_analysis.py` | Static analysis script (no chat, just prints tables) |
 | `win_loss_data.csv` | 50-row sample B2B dataset |
